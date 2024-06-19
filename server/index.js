@@ -17,8 +17,37 @@ const threadList = [];
 // 고유 ID 생성
 const generateID = () => Math.random().toString(36).substring(2, 10);
 
+// mongoose 모듈 불러오기
+const mongoose = require('mongoose'); //라이브러리 자체를 객체로 만들어서 가져옴
+
+// mongoDB 연결
+mongoose
+    .connect('mongodb://127.0.0.1:27017')
+    .then(() => console.log('mongoDB connected!')) // mongoDB 연결 성공 시
+    .catch((e) => console.error(e)); // mongoDB 연결 실패 시
+
+/*---- mongoose의 schema 기능으로 데이터 형식 정의 ----*/
+// 스키마 정의
+const { Schema } = mongoose;
+
+// 새 스키마 구조 생성
+const UserSchema = new Schema({
+    email: String,
+    password: String,
+    username: String,
+    // date: {
+    //     type: Date,
+    //     default: Date.now,
+    // },
+});
+/*----------------------------------------------*/
+
+// 모델 생성, User라는 이름으로 UserSchema를 갖게되 는 모델
+const User = mongoose.model('User', UserSchema);
+
 // 로그인 API 엔드포인트 = 로그인 라우트
 app.post('/api/login', (req, res) => {
+    // console.log(req.body);
     const { email, password } = req.body;
     //사용자 목록에서 이메일과 비밀번호가 일치하는 사용자가 있는지 확인
     let result = users.filter((user) => user.email === email && user.password === password);
@@ -40,17 +69,17 @@ app.post('/api/login', (req, res) => {
 //회원가입 API 엔드포인트 = 라우트
 app.post('/api/register', async (req, res) => {
     const { email, password, username } = req.body;
-    const id = generateID();
+
     //사용자 목록에서 이미 존재하는 사용자인지 확인
-    const result = users.filter((user) => user.email === email && user.password === password);
+    const existingUser = await User.findOne({ email });
 
-    //사용자가 존재하지 않는 경우 새 사용자 생성 후 사용자 목록에 추가
-    if (result.length === 0) {
-        const newUser = { id, email, password, username };
+    //사용자가 존재하지 않는 경우 새 사용자 생성 후 MongoDB에 저장
+    if (!existingUser) {
+        const newUser = new User({ email, password, username });
 
-        users.push(newUser);
+        await newUser.save(); // MongoDB에 사용자 저장
         return res.json({
-            message: 'Account created successfully!',
+            message: 'Account created successed!',
         });
     } else {
         //이미 존재하는 사용자인 경우 에러 메시지 반환
@@ -141,7 +170,7 @@ app.post('/api/create/reply', async (req, res) => {
     });
 });
 
-//서버를 지정된 포트에서 실행/시작해 지정된 포트에서 클라이언트의 요청을 대기
+// 서버를 지정된 포트에서 실행/시작해 지정된 포트에서 클라이언트의 요청을 대기
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
