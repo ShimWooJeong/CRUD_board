@@ -14,11 +14,22 @@ input {
 a {
     text-decoration: none;
 }
-.register,
-.login,
+
 .home,
 .replies,
 .modal {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    margin-top: 60px;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+.register,
+.login {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -27,15 +38,17 @@ a {
     min-height: 100vh;
     padding: 30px;
 }
+
 .registerTitle,
 .loginTitle,
 .homeTitle,
 .repliesTitle {
+    color: #489182;
     margin-bottom: 30px;
 }
 .registerForm,
 .loginForm {
-    width: 80%;
+    width: 30%;
     display: flex;
     flex-direction: column;
 }
@@ -45,15 +58,16 @@ a {
 .modalBtn {
     display: block;
     width: 200px;
-    padding: 15px;
+    padding: 13px;
+    margin: 8px;
     cursor: pointer;
     outline: none;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
     color: #fffbf5;
-    background-color: #674188;
+    background-color: #73b9ab;
     margin-bottom: 15px;
 }
 .homeForm {
@@ -82,11 +96,13 @@ a {
 .thread__item {
     padding: 20px;
     width: 80%;
-    box-shadow: 0 0 1px 1px #c3acd0;
+    box-shadow: 0 0 1px 1px #d3eadc;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
+    background-color: #ffffff;
 }
 .likes__container {
     display: flex;
@@ -95,7 +111,8 @@ a {
 }
 .likesBtn {
     height: 30px;
-    color: #f99417;
+    margin: 2px;
+    color: #71b5a7;
     cursor: pointer;
 }
 .react__container {
@@ -126,7 +143,7 @@ a {
 .navbar {
     width: 100%;
     padding: 10px 20px;
-    background-color: #674188;
+    background-color: #55ad9b;
     display: flex;
     height: 10vh;
     align-items: center;
@@ -142,12 +159,32 @@ a {
 .navbarRight > button {
     padding: 15px;
     width: 150px;
-    background-color: #f99417;
+    background-color: #95d2b3;
     color: #fffbf5;
     font-size: 16px;
+
     border: none;
     outline: none;
     margin-left: 15px;
     cursor: pointer;
     border-radius: 3px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.nav {
+    float: right;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 200px;
+    margin-bottom: 40px;
 }

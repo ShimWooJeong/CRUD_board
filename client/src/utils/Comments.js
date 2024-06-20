@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const Comments = ({ numberOfComments, threadId }) => {
     const navigate = useNavigate();
 
-    const handleAddComment = () => {
-        navigate(`/${threadId}/replies`);
-    };
     return (
         <div className="likes__container">
             <svg
@@ -14,7 +11,6 @@ const Comments = ({ numberOfComments, threadId }) => {
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 className="w-6 h-6 likesBtn"
-                onClick={handleAddComment}
             >
                 <path
                     fillRule="evenodd"

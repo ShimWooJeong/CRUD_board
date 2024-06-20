@@ -12,7 +12,7 @@ const Nav = () => {
 
     return (
         <nav className="navbar">
-            <h2>Threadify</h2>
+            <h2>CRUD-Board</h2>
             <div className="navbarRight">
                 <button onClick={signOut}>Sign out</button>
             </div>

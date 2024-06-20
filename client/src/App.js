@@ -4,6 +4,8 @@ import Register from './components/Register'; // Register 컴포넌트 불러오
 import Login from './components/Login'; // Login 컴포넌트 불러오기
 import Home from './components/Home'; // Home 컴포넌트 불러오기
 import Replies from './components/Replies'; // Replies 컴포넌트 불러오기
+import Write from './components/Write'; // Writes 컴포넌트 불러오기
+import ThreadDetail from './components/ThreadDetail';
 
 const App = () => {
     return (
@@ -20,6 +22,9 @@ const App = () => {
                     <Route path="/dashboard" element={<Home />} />
                     {/* path="/:id/replies" URL 경로에 Replies 컴포넌트 렌더링 */}
                     <Route path="/:id/replies" element={<Replies />} />
+                    {/* path="/:id/boardwrite" */}
+                    <Route path="/:id/board" element={<Write />} />
+                    <Route path="/thread/:id" element={<ThreadDetail />} />
                 </Routes>
             </BrowserRouter>
         </div>
